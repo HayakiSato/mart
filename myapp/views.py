@@ -13,14 +13,8 @@ def index(request):
     sel = seller
     mem = memb
     
-    if(request.method == "POST"): 
-        productName = request.POST["productName"]
-        product = models.Product.objects.get(pName=productName)
-
-        return render(request,"search.html",locals())
-    else:
-        productall = models.Product.objects.all()
-        return render(request,"index.html",locals())
+    productall = models.Product.objects.all()
+    return render(request,"index.html",locals())
 
 def detail(request, id=None):
     global memb, seller
