@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>賣家註冊</title>
+<style>
+    a1{
+        color: red;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1 align="center" style="margin-top: 8%; color: brown;">賣家註冊</h1>
+{% if mode == "ok" %}
+<h3 align="center" style="color: green;">註冊成功!</h3>
+{% endif %}
+<form action="/sellerpro/" method="POST">
+{% csrf_token %}
+
+<table width="50%" border="3" align="center" cellpadding="4" cellspacing="0">
+    <tr>
+        <th><a1>*</a1>帳號:</th>
+        <td>
+            <input type="text" id="sAccount" name="sAccount" value="{{sAccount}}" required><br>
+            {% if mode == "account" %}
+            <a1>帳號已註冊</a1>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>密碼:</th>
+        <td>
+            <input type="password" id="sPswd" name="sPswd" value="{{sPswd}}" required>
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>確認密碼:</th>
+        <td>
+            <input type="password" id="sPswdCheck" name="sPswdCheck" value="{{sPswdCheck}}" required><br>
+            {% if mode == "pswd" %}
+            <a1>確認密碼與輸入密碼不相同</a1>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>姓名:</th>
+        <td>
+            <input type="text" id="sName" name="sName" value="{{sName}}" required>
+        </td>
+    </tr>
+    <tr>
+        <th>性別:</th>
+        <td>
+            {% if sSex == "F" %}
+            <input type="radio" id="sSex" name="sSex" value="M">男
+            <input type="radio" id="sSex" name="sSex" value="F" checked>女
+            {% else %}
+            <input type="radio" id="sSex" name="sSex" value="M" checked>男
+            <input type="radio" id="sSex" name="sSex" value="F">女
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>生日:</th>
+        <td>
+            <input type="date" id="sBirthday" name="sBirthday" value="{{sBirthday}}">
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>信箱:</th>
+        <td>
+            <input type="text" id="sEmail" name="sEmail" value="{{sEmail}}" required pattern="^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"><br>
+            {% if mode == "email" %}
+            <a1>信箱已註冊</a1>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>電話:</th>
+        <td>
+            <input type="text" id="sPhone" name="sPhone" value="{{sPhone}}" required>
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>地址:</th>
+        <td>
+            <input type="text" id="sAddr" name="sAddr" value="{{sAddr}}" required>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="submit" align="center"> 
+            {% if mode == "ok" %}
+            <input type="button" name="back" id="button3"value="返回" onclick="window.location='/sellerlogin/'" />
+            {% else %}
+            <input type="submit" name="button" id="button" value="送出">
+            <input type="reset" name="button2" id="button2" value="重設">
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+{% endblock %}

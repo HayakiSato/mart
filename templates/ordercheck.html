@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    {% if firstsearch == 1 %}
+      <form action="/ordercheck/" method="GET" name="form1">
+        <p class="littleTitle">訂單查詢 </p>
+        <table border="0" align="center" cellpadding="10" cellspacing="0">
+          <tr>
+            <td>訂單編號</td>
+            <td><input name="orderid" type="text" size="10" required/></td>
+            <td>客戶電話</td>
+            <td><input name="phone" type="text" required/></td>
+            <td><input type="submit" name="Submit3" value="送出" /></td>
+          </tr>
+        </table>
+      </form>
+    {% else %}
+      {% if notfound == 1 %}
+        <div>對不起，資料庫中並沒相關的資訊，請重新輸入。</div>
+        <form action="/ordercheck/" method="GET" name="form2">
+          <p class="littleTitle">訂單查詢 </p>
+          <table border="0" align="center" cellpadding="10" cellspacing="0">
+            <tr>
+              <td>訂單編號</td>
+              <td><input name="orderid" type="text" size="10" required/></td>
+              <td>客戶電話</td>
+              <td><input name="phone" type="text" required/></td>
+              <td><input type="submit" name="Submit3" value="送出" /></td>
+            </tr>
+          </table>
+        </form>
+      {% else %}
+        <p class="littleTitle">訂單資料 </p>
+        <p style="color: rgb(50, 158, 50); font-family: 標楷體;"><strong>訂單編號：{{orderid}}</strong></p>
+        <table width="90%" border="1" align="center" cellpadding="4" cellspacing="1">
+          <tr>
+            <td align="center" bgcolor="#CCCCCC">商品名稱</td>
+            <td width="80" align="center" bgcolor="#CCCCCC">單價</td>
+            <td width="80" align="center" bgcolor="#CCCCCC">數量</td>
+            <td width="150" align="center" bgcolor="#CCCCCC">金額</td>
+          </tr>
+          {% for order in orders %}
+            <tr>
+              <td align="left" bgcolor="#FFFFFF">{{order.rProduct}}</td>
+              <td width="80" align="center" bgcolor="#FFFFFF">$ {{order.rPrice}}</td>
+              <td width="80" align="center" bgcolor="#FFFFFF">{{order.rQty}}</td>
+              <td width="150" align="center" bgcolor="#FFFFFF"><strong>$ {{order.rTotal}}</strong></td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="3" align="left" bgcolor="#FFFFFF" class="upline"><strong>運費</strong> (固定運費 60 元) </td>
+            <td width="150" align="center" bgcolor="#FFFFFF" class="upline"><strong>$ 60</strong></td>
+          </tr>
+          <tr>
+            <td colspan="3" align="left" bgcolor="#FFFFFF" class="downline"><strong>總計</strong></td>
+            <td width="150" align="center" bgcolor="#FFFFFF" class="downline"><strong><font color="#FF0000">$ {{addressee.rGrandtotal}}</font></strong></td>
+          </tr>
+        </table>
+        <p style="color: rgb(50, 158, 50); font-family: 標楷體;"><strong>客戶資料</strong></p>
+        <table width="90%" border="1" align="center" cellpadding="4" cellspacing="1">
+          <tr>
+            <td width="100" align="center" bgcolor="#CCCCCC"><strong>姓名</strong></td>
+            <td bgcolor="#FFFFFF">{{addressee.rName}}</td>
+          </tr>
+          <tr>
+            <td width="100" align="center" bgcolor="#CCCCCC"><strong>聯絡電話</strong></td>
+            <td bgcolor="#FFFFFF">{{addressee.rPhone}}</td>
+          </tr>
+          <tr>
+            <td align="center" bgcolor="#CCCCCC"><strong>住址</strong></td>
+            <td bgcolor="#FFFFFF">{{addressee.rAddr}}</td>
+          </tr>
+          <tr>
+            <td align="center" bgcolor="#CCCCCC"><strong>電子郵件</strong></td>
+            <td bgcolor="#FFFFFF">{{addressee.rEmail}}</td>
+          </tr>
+          <tr>
+            <td align="center" bgcolor="#CCCCCC"><strong>付款方式</strong></td>            
+            <td bgcolor="#FFFFFF">{{addressee.rPay}}</td>
+          </tr>
+          <tr>
+            <td align="center" bgcolor="#CCCCCC"><strong>商品狀態</strong></td>            
+            <td bgcolor="#FFFFFF">{{addressee.rState}}</td>
+          </tr>
+        </table>
+        <div style="clear:both"></div>
+        <table border="0" align="center" cellpadding="10" cellspacing="0">          
+          <tr>
+            {% if sel.0 == "1" %} 
+            <td><input type="button" name="Submit2" value="返回" onclick="window.location='/background/'" /></td>
+            {% elif mem.8 == "2" %}
+            <td><input type="button" name="Submit" value="回到首頁" onclick="window.location='/index/'" /></td>             
+            {% endif %}
+          </tr>         
+        </table>
+      {% endif %}
+    {% endif %}
+{% endblock %}

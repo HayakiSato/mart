@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈燒商城</title>
+    {% load static %}
+    <link href="{% static './style.css' %}" rel="stylesheet" type="text/css">
+    {% block title %}{% endblock %}
+    {% block script %}{% endblock %}
+    <style>
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body style="background-color: lightgray;">
+    <div id="warp">
+        <div id="header">
+            <a class="hdtop" href="/index">哈燒商城</a>
+            <a class="hd" href="/memberlogin">會員登入</a>
+            <a class="hd" href="/sellerlogin">賣家登入</a>
+        </div>
+        <div id="content">           
+            {% if sel.0 == "1" %}    
+                <div class="sidediv">       
+                    <ul type="None">
+                        <li style="color: lightgoldenrodyellow; font-family: 標楷體;">{{sel.1}} 您好!</li>
+                        <li></br></li>
+                        <li><a href="/productupload">新增商品</a></li>
+                        <li><a href="/productindex">商品管理</a></li>
+                        <li><a href="/background">訂單管理</a></li>
+                        <li><a href="/index">回到首頁</a></li>
+                        <li></br></li>
+                        <li><a href="/memberlogout">登出</a></li>
+                    </ul>
+                </div>
+            {% elif mem.8 == "2" %}
+                <div class="sidediv">       
+                    <ul type="None">
+                        <li style="color: lightgoldenrodyellow; font-family: 標楷體;">{{mem.0}} 您好!</li>
+                        <li></br></li>
+                        <li><a href="/memberinfo">會員資料</a></li>
+                        <li><a href="/shoppingcar">我的購物車</a></li>
+                        <li><a href="/membercheck">訂單查詢</a></li>
+                        <li><a href="/index">回到首頁</a></li>
+                        <li></br></li>
+                        <li><a href="/memberlogout">登出</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="sidediv">       
+                    <ul type="None">
+                        <li style="color: lightgoldenrodyellow; font-family: 標楷體;">您好!</li>
+                        <li></br></li>
+                        <li><a href="/shoppingcar">購物車</a></li>
+                        <li><a href="/index">回到首頁</a></li>
+                    </ul>
+                </div>
+            {% endif %}
+            <div id="maindiv">
+            {% block content %}{% endblock %}
+            </div>
+        </div>    
+    </div>        
+</body>
+</html>

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block content %}
+    <form action="/addtocar/update/" method="post" name="form1" id="form1">
+      {% csrf_token %}
+      <table width="100%" border="3" align="center" cellpadding="4" cellspacing="0">
+        <caption style="color: royalblue; font-size: larger; font-weight: bold;">購物車</caption>
+        <tr bgcolor="#aaaaaa" align="center" width="80">
+          <th width="70" ><strong>刪除商品</th>
+          <th style="font-weight: bold;">商品名稱</th>
+          <th style="font-weight: bold;">單價</th>
+          <th style="font-weight: bold;">數量</th>
+          <th width="100" style="font-weight: bold;">金額</th>
+        </tr>
+        {% for unit in shoplist %}
+        <tr bgcolor="#FFFFFF" align="center" width="80">
+          <td><a href="/addtocar/{{forloop.counter0}}/remove" class="delcart" onClick="doublecheck('您確定要刪除這個商品嗎？'); return document.returnValue"><button type="button">刪除</button></a></td>
+          <td align="left">{{unit.0}}</td>
+          <td>$ {{unit.1}}</td>
+          <td><input name="qty{{forloop.counter0}}" type="text" id="qty{{forloop.counter0}}" value="{{unit.2}}" size="2" /></td>
+          <td style="font-weight: bold;">$ {{unit.3}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+        <br><br>
+        <table width="43%" border="3" align="right" bgcolor="#FFFFFF" cellpadding="4" cellspacing="0">
+        <tr>
+          <td colspan="4" align="left" style="font-weight: bold;">小計</td>
+          <td align="center"> $ {{total}}</td>
+        </tr>
+        <tr>
+          <td colspan="4" align="left" style="font-weight: bold;">運費 (固定運費 60 元) </td>
+          <td width="100" align="center">$ 60</td>
+        </tr>
+        <tr>
+          <td colspan="4" align="left" style="font-weight: bold;">總計</td>
+          <td align="center"><strong><font color="#FF0000">$ {{finaltotal}}</font></strong></td>
+        </tr>
+      </table>
+      <table border="0" align="center" cellpadding="10" cellspacing="0" style="margin-top: 25%;">
+        <tr>
+          <td><input type="button" name="Continue" value="繼續購物" onclick="window.location='/index/'" /></td>
+          <td><input name="Submit" type="submit" id="Submit" value="更新購物車"></td>
+          <td><input name="Empty" type="button" id="Empty" onclick="window.location='/addtocar/delete/'" value="清空購物車" /></td>
+          <td><input name="Order" type="button" id="Order" onclick="window.location='/order/'" value="我要結帳" /></td>
+        </tr>
+      </table>
+    </form>
+{% endblock %}

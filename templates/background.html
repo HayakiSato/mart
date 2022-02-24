@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<form action="/background/" method="POST">
+{% csrf_token %}
+    <p class="littleTitle">訂單資料 </p>
+    <table style="margin-top:10%" width="100%" border="3" align="center" cellpadding="4" cellspacing="0">
+      <tr align="center">
+        <td>訂單編號</td>
+        <td>收件人</td>
+        <td>收件人電話</td>
+        <td>總金額</td>
+        <td>詳細資料</td>
+        <td>商品狀態</td>
+        <td>寄件</td>
+        <td>取消訂單</td>
+      </tr>
+    {% for addressee in addressees %}
+      {% if addressee.rState == "賣家備貨中" %}
+        <tr>
+          <td align="center">{{addressee.id}}</td>
+          <td>{{addressee.rName}}</td>
+          <td>{{addressee.rPhone}}</td>
+          <td>${{addressee.rGrandtotal}}</td>
+          <td align="center"><a href="/ordercheck/?orderid={{addressee.id}}&phone={{addressee.rPhone}}"style="font-size: 5px; font-family: 標楷體;">詳細資料</a></td>
+          <td align="center">{{addressee.rState}}</td>
+          <td align="center"><input name="send" type="button" id="send" onclick="window.location='/background/send/{{addressee.id}}'" value="寄出" /></td>
+          <td align="center"><input name="delete" type="button" id="delete" onclick="window.location='/background/delete/{{addressee.id}}'" value="取消訂單" /></td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+    </table>
+    <table style="margin-top:10%" width="100%" border="3" align="center" cellpadding="4" cellspacing="0">
+      <caption class="littleTitle">已寄出</caption>
+      <tr align="center">
+        <td>訂單編號</td>
+        <td>收件人</td>
+        <td>收件人電話</td>
+        <td>總金額</td>
+        <td>詳細資料</td>
+        <td>商品狀態</td>
+      </tr>
+    {% for addressee in addressees %}
+      {% if addressee.rState == "商品已寄出" %}
+        <tr>
+          <td align="center">{{addressee.id}}</td>
+          <td>{{addressee.rName}}</td>
+          <td>{{addressee.rPhone}}</td>
+          <td>${{addressee.rGrandtotal}}</td>
+          <td align="center"><a href="/ordercheck/?orderid={{addressee.id}}&phone={{addressee.rPhone}}"style="font-size: 5px; font-family: 標楷體;">詳細資料</a></td>
+          <td align="center">{{addressee.rState}}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+    </table>
+    <table style="margin-top:10%" width="100%" border="3" align="center" cellpadding="4" cellspacing="0">
+      <caption class="littleTitle">已送達</caption>
+      <tr align="center">
+        <td>訂單編號</td>
+        <td>收件人</td>
+        <td>收件人電話</td>
+        <td>總金額</td>
+        <td>詳細資料</td>
+        <td>商品狀態</td>
+      </tr>
+    {% for addressee in addressees %}
+      {% if addressee.rState == "已取件" %}
+        <tr>
+          <td align="center">{{addressee.id}}</td>
+          <td>{{addressee.rName}}</td>
+          <td>{{addressee.rPhone}}</td>
+          <td>${{addressee.rGrandtotal}}</td>
+          <td align="center"><a href="/ordercheck/?orderid={{addressee.id}}&phone={{addressee.rPhone}}"style="font-size: 5px; font-family: 標楷體;">詳細資料</a></td>
+          <td align="center">{{addressee.rState}}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+    </table>
+    <table style="margin-top:10%" width="100%" border="3" align="center" cellpadding="4" cellspacing="0">
+      <caption class="littleTitle">取消訂單</caption>
+      <tr align="center">
+        <td>訂單編號</td>
+        <td>收件人</td>
+        <td>收件人電話</td>
+        <td>總金額</td>
+        <td>詳細資料</td>
+        <td>商品狀態</td>
+      </tr>
+    {% for addressee in addressees %}
+      {% if addressee.rState == "取消訂單" %}
+        <tr>
+          <td align="center">{{addressee.id}}</td>
+          <td>{{addressee.rName}}</td>
+          <td>{{addressee.rPhone}}</td>
+          <td>${{addressee.rGrandtotal}}</td>
+          <td align="center"><a href="/ordercheck/?orderid={{addressee.id}}&phone={{addressee.rPhone}}"style="font-size: 5px; font-family: 標楷體;">詳細資料</a></td>
+          <td align="center">{{addressee.rState}}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+    </table>
+{% endblock %}

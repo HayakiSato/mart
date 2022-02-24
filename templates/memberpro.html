@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>會員註冊</title>
+<style>
+    a1{
+        color: red;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1 align="center" style="margin-top: 8%; color: brown;">會員註冊</h1>
+{% if mode == "ok" %}
+<h3 align="center" style="color: green;">註冊成功!</h3>
+{% endif %}
+<form action="/memberpro/" method="POST">
+{% csrf_token %}
+
+<table width="50%" border="3" align="center" cellpadding="4" cellspacing="0">
+    <tr>
+        <th><a1>*</a1>帳號:</th>
+        <td>
+            <input type="text" id="cAccount" name="cAccount" value="{{cAccount}}" required><br>
+            {% if mode == "account" %}
+            <a1>帳號已註冊</a1>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>密碼:</th>
+        <td>
+            <input type="password" id="cPswd" name="cPswd" value="{{cPswd}}" required>
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>確認密碼:</th>
+        <td>
+            <input type="password" id="cPswdCheck" name="cPswdCheck" value="{{cPswdCheck}}" required><br>
+            {% if mode == "pswd" %}
+            <a1>確認密碼與輸入密碼不相同</a1>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>姓名:</th>
+        <td>
+            <input type="text" id="cName" name="cName" value="{{cName}}" required>
+        </td>
+    </tr>
+    <tr>
+        <th>性別:</th>
+        <td>
+        <input type="radio" id="cSex" name="cSex" value="M" checked>男
+        <input type="radio" id="cSex" name="cSex" value="F">女
+        </td>
+    </tr>
+    <tr>
+        <th>生日:</th>
+        <td>
+            <input type="date" id="cBirthday" name="cBirthday" value="{{cBirthday}}">
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>信箱:</th>
+        <td>
+            <input type="text" id="cEmail" name="cEmail" value="{{cEmail}}" required pattern="^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"><br>
+            {% if mode == "email" %}
+            <a1>信箱已註冊</a1>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>電話:</th>
+        <td>
+            <input type="text" id="cPhone" name="cPhone" value="{{cPhone}}" required>
+        </td>
+    </tr>
+    <tr>
+        <th><a1>*</a1>地址:</th>
+        <td>
+            <input type="text" id="cAddr" name="cAddr" value="{{cAddr}}" required>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="submit" align="center"> 
+            {% if mode == "ok" %}
+            <input type="button" name="back" id="button3"value="返回" onclick="window.location='/memberlogin/'" />
+            {% else %}
+            <input type="submit" name="button" id="button" value="送出">
+            <input type="reset" name="button2" id="button2" value="重設">
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+
+{% endblock %}

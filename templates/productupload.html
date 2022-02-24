@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<form action="/productupload/" enctype="multipart/form-data" method="POST">
+{% csrf_token %}
+
+	<table width="100%" border="1px" align="center" cellpadding="4" cellspacing="0">
+	    <tr valign="top">
+            <td width="200" align="center">
+                <p class="subject">上傳圖片</p>
+                <p><input type="file" id="pro_Image" name="pro_Image" required></p>	    
+            </td>
+            <td>          
+                <p class="subject">產品名稱</p>
+                <input class="desc" type="text" id="pName" name="pName" required >
+                <p class="subject">產品介紹</p>
+                <textarea class="desc" id="pDescription" name="pDescription" cols="45" rows="4"></textarea>
+                <p class="subject">產品價格</p>
+                <input class="desc" type="text" id="pPrice" name="pPrice" required >
+                <p class="subject">產品庫存</p>
+                <input class="desc" type="text" id="pQty" name="pQty" required >
+            </td>
+	    </tr>
+	</table>
+	<p align="center"> 
+        <input type="submit" name="button" id="button" value="新增">
+	  	<input type="button" name="button" id="button" value="返回" onclick="javascript:history.go(-1)">
+	</p>
+  </form>	  
+
+{% endblock %}

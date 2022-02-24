@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <form action="/checkok/" method="post" name="form3" id="form3">
+      {% csrf_token %}
+      <table width="100%" border="3" align="center" cellpadding="4" cellspacing="0">
+        <caption style="color: royalblue; font-size: larger; font-weight: bold;">訂單資訊</caption>
+        <tr bgcolor="#aaaaaa" align="center" width="80">
+          <th style="font-weight: bold;">商品名稱</th>
+          <th style="font-weight: bold;">單價</th>
+          <th style="font-weight: bold;">數量</th>
+          <th width="100" style="font-weight: bold;">金額</th>
+        </tr>
+        {% for unit in shoplist %}
+        <tr bgcolor="#FFFFFF" align="center" width="80">
+          <td align="left">{{unit.0}}</td>
+          <td>$ {{unit.1}}</td>
+          <td>{{unit.2}}</td>
+          <td style="font-weight: bold;">$ {{unit.3}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+        <br>
+        <table width="43%" border="3" align="right" bgcolor="#FFFFFF" cellpadding="4" cellspacing="0">
+        <tr>
+          <td colspan="4" align="left" style="font-weight: bold;">小計</td>
+          <td align="center"> $ {{total}}</td>
+        </tr>
+        <tr>
+          <td colspan="4" align="left" style="font-weight: bold;">運費 (固定運費 60 元) </td>
+          <td width="100" align="center">$ 60</td>
+        </tr>
+        <tr>
+          <td colspan="4" align="left" style="font-weight: bold;">總計</td>
+          <td align="center"><strong><font color="#FF0000">$ {{finaltotal}}</font></strong></td>
+        </tr>
+      </table>
+      <br><br><br><br><br><br><br><br>  
+      <table width="100%" border="3" align="center" cellpadding="4" cellspacing="0">
+        <caption style="color: royalblue; font-size: larger;"><strong>收件人資料</strong></caption>
+        <tr>
+            <th style="font-weight: bold;">姓名</th>
+            <th align="left"><input name="rName" type="text" id="rName" value="{{mem.0}}" size="5" required/></th>
+        </tr>
+        <tr>
+            <th style="font-weight: bold;">電話</th>
+            <th align="left"><input name="rPhone" type="text" id="rPhone" value="{{mem.4}}" size="10" required/></th>
+        </tr>
+        <tr>
+            <th style="font-weight: bold;">住址</th>
+            <th align="left"><input name="rAddr" type="text" id="pAddr" value="{{mem.5}}" size="50" required/></th>
+        </tr>
+        <tr>
+            <th style="font-weight: bold;">電子郵件</th>
+            <th align="left"><input name="rEmail" type="text" id="rEmail" value="{{mem.3}}" size="50" required/></th>
+        </tr>
+        <tr>
+            <th style="font-weight: bold;">付款方式</th>
+            <th align="center">
+                <input type="radio" id="rPay" name="rPay" value="ATM轉帳">ATM轉帳
+                <input type="radio" id="rPay" name="rPay" value="信用卡支付">信用卡支付
+                <input type="radio" id="rPay" name="rPay" value="貨到付款" checked>貨到付款
+            </th>
+        </tr>
+      </table>
+      <table border="0" align="center" cellpadding="10" cellspacing="0" style="margin-top: 3%;">
+        <tr>
+          <td><input type="button" name="Continue" value="繼續購物" onclick="window.location='/index/'" /></td>
+          <td><input type="button" name="Order"  id="Order" onclick="window.location='/shoppingcar/'" value="修改購物車" /></td>
+          <td><input type="submit" name="button" id="button" value="結帳"></td>
+        </tr>
+      </table>     
+    </form>
+{% endblock %}

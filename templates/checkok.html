@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div style="background-color: burlywood; text-align: center; font-weight: bold;">
+        <p style="color: royalblue; font-size: larger; ">訂購完成!</p>
+        <p style="color: red; font-size: larger;">感謝您的訂購!</p>
+        {% if mem.cSex == "M" %}
+        <p>親愛的<strong>{{rName}}</strong>先生</p>
+        {% elif mem.cSex == "F" %}
+        <p>親愛的<strong>{{rName}}</strong>小姐</p>
+        {% else %}
+        <p>親愛的<strong>{{rName}}</strong>(先生/小姐)</p>
+        {% endif %}
+        <p>您已完成訂購程序</p>
+        <p>我們將盡快將您所選購的商品寄出!</p>
+        <p>感謝您的支持!</p>
+        <a href="/ordercheck/?orderid={{orderid}}&phone={{rPhone}}">訂單內容</a>
+    </div>
+    
+{% endblock %}

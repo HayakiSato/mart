@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %} 
+
+  <form action="/index/" method="Post">
+    {% csrf_token %}
+    <input type="text" id="productName" name="productName" placeholder="請輸入商品名稱">
+    <input type="submit" id="Submit" name="Submit" value="查詢">
+
+  <div class="littleTitle">熱門商品</div><br>
+  {% for product in productall %}
+    <div class="block_product">
+      <div class="product_photo">
+        <a href="/detail/{{product.id}}"><img src="{{product.pro_Image.url}}" alt="產品詳細資料" width="135" height="135" border="0" /></a>
+        <div class="product_name"><a href="/detail/{{product.id}}">{{product.pName}}</a></div>
+        <div class="product_price">$ {{product.pPrice}}</div>
+        <div class="product_qty">庫存:{{product.pQty}}</div>
+      </div>
+    </div>
+  {% endfor %}
+
+{% endblock content %}

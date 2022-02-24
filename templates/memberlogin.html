@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>會員登入</title>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+
+{% block content %}
+<form action="/memberlogin/" method="POST" name="form2" id="form2">
+{% csrf_token %}
+
+<table style="margin-top:20px;"  width="40%" border="3" align="center" cellpadding="4" cellspacing="0">
+    <caption style="color: royalblue; font-size: larger; font-weight: bold;">會員登入</caption>
+    <tr>
+        <th>帳號</th>
+        <td><input type="text" id="cAccount" name="cAccount"></td>
+    </tr>
+    <tr>
+        <th>密碼:</th>
+        <td><input type="password" id="cPswd" name="cPswd"></td>
+    </tr>
+    <td colspan="2" class="submit" align="center"> 
+        <input type="submit" name="button" id="button" value="登入">
+        <input type="submit" name="button" id="button2" value="註冊">
+    </td>
+</table>
+
+{% if mode == "default" %}
+<h5 align="center" style="color: red;">密碼錯誤!</h5>
+{% elif mode == "fault" %}
+<h5 align="center" style="color: red;">無此帳號!</h5>
+{% endif %}
+
+{% endblock %}

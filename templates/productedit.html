@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<form action="/productedit/{{product.id}}/add/" method="POST">
+{% csrf_token %}
+
+	<table width="100%" border="1px" align="center" cellpadding="4" cellspacing="0">
+	    <tr valign="top">
+            <td width="200" align="center">
+                <p><img src="{{product.pro_Image.url}}" width="200" height="200" border="0" />	    
+            </td>
+            <td>          
+                <p class="subject">產品名稱</p>
+                <input class="desc" type="text" id="pName" name="pName" required value="{{product.pName}}">
+                <p class="subject">產品介紹</p>
+                <textarea class="desc" id="pDescription" name="pDescription" cols="45" rows="4">{{product.pDescription}}</textarea>
+                <p class="subject">產品價格</p>
+                <input class="desc" type="text" id="pPrice" name="pPrice" required value="{{product.pPrice}}">
+                <p class="subject">產品庫存</p>
+                <input class="desc" type="text" id="pQty" name="pQty" required value="{{product.pQty}}">
+            </td>
+	    </tr>
+	</table>
+	<p align="center"> 
+        <input type="submit" name="button" id="button" value="修改">
+	  	<input type="button" name="button" id="button" value="返回" onclick="javascript:history.go(-1)">
+	</p>
+  </form>	  
+{% endblock %}

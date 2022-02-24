@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>會員資料</title>
+<style>
+    a1{
+        color: red;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1 align="center" style="margin-top: 8%; color: brown;">會員資料</h1>
+
+<table width="50%" border="3" align="center" cellpadding="4" cellspacing="0">
+    <tr>
+        <th>帳號:</th>
+        <td>
+            {{member.cAccount}}
+        </td>
+    </tr>
+    <tr>
+        <th>姓名:</th>
+        <td>
+            {{member.cName}}
+        </td>
+    </tr>
+    <tr>
+        <th>性別:</th>
+        <td>
+            {% if member.cSex == "M" %}
+                男            
+            {% else %}
+                女
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>生日:</th>
+        <td>
+            {{member.cBirthday}}
+        </td>
+    </tr>
+    <tr>
+        <th>信箱:</th>
+        <td>
+            {{member.cEmail}}
+        </td>
+    </tr>
+    <tr>
+        <th>電話:</th>
+        <td>
+            {{member.cPhone}}
+        </td>
+    </tr>
+    <tr>
+        <th>地址:</th>
+        <td>
+            {{member.cAddr}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" class="submit" align="center"> 
+            <input name="Order" type="button" id="Order" onclick="window.location='/memberedit/'" value="編輯" />
+        </td>
+    </tr>
+</table>
+
+{% endblock %}

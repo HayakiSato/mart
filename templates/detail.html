@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+	<table width="100%" border="1px" align="center" cellpadding="4" cellspacing="0">
+	  <tr valign="top">
+		<td width="200" align="center">
+            <p><img src="{{product.pro_Image.url}}" width="200" height="200" border="0" />
+		    <p class="product_price">特價<br />${{product.pPrice}}</p>
+        </td>
+		<td>
+            <p class="subject">產品名稱</p>
+		    <p class="desc">{{product.pName}} </p>
+		    <p class="subject">產品介紹</p>
+		    <p class="desc">{{product.pDescription}}</p>
+        </td>
+	  </tr>
+	</table>
+	<p align="center"> 
+		<a href="/addtocar/{{product.id}}/add/"><button>加入購物車</button></a>
+	  	<input type="button" name="button" id="button" value="回到上一頁" onclick="javascript:history.go(-1)">
+	</p>
+  </form>	  
+{% endblock %}
